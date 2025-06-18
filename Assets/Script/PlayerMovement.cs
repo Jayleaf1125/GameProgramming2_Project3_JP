@@ -1,0 +1,58 @@
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    [Header("Basic Movment Properties")]
+    public float movementSpeed;
+    public float runSpeed;
+
+    [Header("Material Properties")]
+    public Material runMat;
+
+    Rigidbody _rb;
+    Vector3 _vectorMovement;
+    Material _originalMat;
+    Renderer _renderer;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _renderer = GetComponent<Renderer>();
+        
+        _originalMat = _renderer.material;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Run();
+    }
+
+    void FixedUpdate() 
+    {
+        MovementSetup();
+    }
+
+    void MovementSetup() 
+    {
+        _vectorMovement.x = Input.GetAxisRaw("Horizontal");
+        _vectorMovement.z = Input.GetAxisRaw("Vertical");
+
+        _rb.MovePosition(_rb.position + _vectorMovement * movementSpeed * Time.fixedDeltaTime);
+    }
+
+    private void Run()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _renderer.material = runMat;
+            movementSpeed *= runSpeed;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _renderer.material = _originalMat;
+            movementSpeed /= runSpeed;
+        }
+    }
+}
