@@ -1,11 +1,12 @@
-using UnityEditor;
 using UnityEngine;
+using System.Collections;
 
 public class PlayerCombat : MonoBehaviour
 {
     Rigidbody _rb;
     [SerializeField] GameObject _stompParticlesPrefab;
     public Transform stompParticlesPos;
+    public float propelForce;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,11 +30,20 @@ public class PlayerCombat : MonoBehaviour
 
             if (enemyHead != null && enemyHead.CompareTag("Enemy_Head")) 
             {
-                _rb.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
-                Instantiate(_stompParticlesPrefab, stompParticlesPos.position, Quaternion.identity);
+                _rb.AddForce(new Vector3(0, propelForce, 0), ForceMode.Impulse);
+                StartCoroutine(SpawnStompParticles());
             }
         }
     }
+
+    IEnumerator SpawnStompParticles()
+    {
+        var par = Instantiate(_stompParticlesPrefab, stompParticlesPos.position, Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+        Destroy(par);
+    }
+
+    
 
     private void OnDrawGizmos()
     {
