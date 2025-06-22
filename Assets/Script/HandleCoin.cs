@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HandleCoin : MonoBehaviour
 {
-    private float value = 1;
+    float _rotationSpeed = 2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,19 +17,8 @@ public class HandleCoin : MonoBehaviour
         Rotate();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var obj = other.gameObject;
-
-        if (obj.CompareTag("Player"))
-        {
-            Debug.Log("Coin Picked Up");
-            Destroy(this.gameObject);
-        }
-    }
-
     void Rotate()
     {
-        gameObject.transform.Rotate(new Vector3(0, 0, 5));
+        gameObject.transform.Rotate(new Vector3(0, 0, _rotationSpeed));
     }
 }
