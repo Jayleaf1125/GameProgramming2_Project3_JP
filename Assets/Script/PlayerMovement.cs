@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Cinemachine")]
     public Transform followTarget;
 
+    [Header("Gliding Properties")]
+
     Rigidbody _rb;
     Vector3 _vectorMovement;
     Material _originalMat;
