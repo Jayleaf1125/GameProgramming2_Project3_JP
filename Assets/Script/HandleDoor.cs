@@ -3,6 +3,7 @@ using UnityEngine;
 public class HandleDoor : MonoBehaviour
 {
     public GameManager gm;
+    public float amountOfCoinsNeededToOpenDoor;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,9 +20,9 @@ public class HandleDoor : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            if(gm.GetTotalScore() == 25)
+            if(gm.GetTotalScore() == amountOfCoinsNeededToOpenDoor)
             {
-                Debug.Log("Door can be entered");
+                Destroy(gameObject);
             } else
             {
                 Debug.Log("Door cannot be entered");
