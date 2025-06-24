@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using TMPro;
 
 public class HandleDoor : MonoBehaviour
@@ -35,9 +36,17 @@ public class HandleDoor : MonoBehaviour
                 HandleUnlocking();
             } else
             {
-                Debug.Log("Door cannot be entered");
+                StartCoroutine(TryAgain()); 
             }
         }
+    }
+
+    IEnumerator TryAgain()
+    {
+        string temp = message.text;
+        message.text = "You're missing coins";
+        yield return new WaitForSeconds(3f);
+        message.text = temp;
     }
 
     void HandleUnlocking()
