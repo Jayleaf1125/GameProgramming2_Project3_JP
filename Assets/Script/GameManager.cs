@@ -12,6 +12,6 @@ public class GameManager : MonoBehaviour
         _totalScore = 0;
     }
 
-    public void IncrementTotalScore() => _scoreText.text = $"Score: {++_totalScore}";
+    public void IncrementTotalScore() => _scoreText.text = $"Coins Collected: {++_totalScore}";
     public float GetTotalScore() => _totalScore;
 }

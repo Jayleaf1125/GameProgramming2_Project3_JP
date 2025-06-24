@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class HandleDoor : MonoBehaviour
 {
     public GameManager gm;
     public float amountOfCoinsNeededToOpenDoor;
     public Material portalMaterial;
+    public TMP_Text message;
 
     Renderer _renderer;
     Material _originalMaterial;
@@ -42,11 +45,12 @@ public class HandleDoor : MonoBehaviour
         if (!_isDoorUnlocked)
         {
             _isDoorUnlocked = true;
+            message.text = "Enter the Door";
             _renderer.material = portalMaterial;
         }
         else
         {
-            Debug.Log("You Win. Perfect");
+            SceneManager.LoadScene(1);
         }
     }
 }
